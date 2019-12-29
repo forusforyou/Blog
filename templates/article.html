@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="row">
+<div class="col-lg-4">
+
+ <form action="{% url 'comment' %}" method="post">
+  <div class="form-group">
+
+    <label for="content">添加评论</label>
+     <textarea class="form-control" id="content" rows="2" name="content"></textarea>
+      <button  type="submit" name='artpk' value="{{ article.pk }}" class="btn btn-default" >评论</button>
+  </div>
+
+</form>
+    
+</div>
+ <div class="col-lg-4">
+ <form action="{% url 'article' article.pk %}" method="post">
+  <div class="form-group">
+    <label for="title">标题</label>
+    <input type="text" name="title"  {{ Permit }} value="{{ article.title }}" class="form-control" id="title" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="content">内容</label>
+     <textarea {{ Permit }} class="form-control" id="content" rows="25" name="content">{{ article.content }}</textarea>
+  </div>
+     <button  class="btn btn-default" ><a href="{% url 'index' %}">返回</a></button>
+      <button {{ Permit }} type="submit" class="btn btn-default" >修改</button>
+</form>
+
+ </div>
+<div class="col-lg-4">
+{% for foo in Comment %}
+    <p class="form-control" id="content" >
+       用户 {{ foo.user }}
+       时间 {{ foo.create_time }}
+       内容 {{ foo.content }}
+    </p>
+{% endfor %}
+</div>
+</div>
+
+
+</body>
+</html>
